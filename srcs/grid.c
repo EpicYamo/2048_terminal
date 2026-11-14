@@ -6,7 +6,7 @@
 /*   By: aaycan <aaycan@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/14 21:31:02 by aaycan            #+#    #+#             */
-/*   Updated: 2026/11/14 21:54:45 by aaycan           ###   ########.fr       */
+/*   Updated: 2026/11/14 23:11:34 by aaycan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,8 @@ int	grid_init(t_grid *grid, int rows, int columns)
 	return (1);
 }
 
-int	grid_set_value(t_grid *grid, int row, int column, unsigned int value)
+int	grid_set_value(t_grid *grid, int row, int column,
+		unsigned long long value)
 {
 	if (!is_valid_cell(grid, row, column))
 		return (0);
@@ -50,7 +51,7 @@ int	grid_set_value(t_grid *grid, int row, int column, unsigned int value)
 	return (1);
 }
 
-unsigned int	grid_get_value(const t_grid *grid, int row, int column)
+unsigned long long	grid_get_value(const t_grid *grid, int row, int column)
 {
 	if (!is_valid_cell(grid, row, column))
 		return (0);

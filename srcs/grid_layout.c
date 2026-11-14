@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   grid_layout.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aaycan <aaycan@student.42kocaeli.com.tr    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/11/14 23:11:42 by aaycan            #+#    #+#             */
+/*   Updated: 2026/11/14 23:11:43 by aaycan           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "grid.h"
 
-#define CELL_WIDTH 12
+#define CELL_WIDTH 15
 #define CELL_HEIGHT 4
-#define GRID_MARGIN_Y 2
+#define GRID_MARGIN_Y 1
 #define GRID_MARGIN_X 2
 
 int	grid_layout(t_grid *grid, int terminal_rows, int terminal_columns)

@@ -6,7 +6,7 @@
 /*   By: aaycan <aaycan@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/14 22:52:41 by aaycan            #+#    #+#             */
-/*   Updated: 2026/11/14 23:11:20 by aaycan           ###   ########.fr       */
+/*   Updated: 2026/11/15 02:10:59 by aaycan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,22 +55,22 @@ void	scores_load(t_scores *scores)
 		value = 0;
 		valid = 1;
 		has_digit = 0;
-		while (position < length && buffer[position] != '\n')
+		while ((position < length) && (buffer[position] != '\n'))
 		{
-			if (buffer[position] >= '0' && buffer[position] <= '9')
+			if ((buffer[position] >= '0') && (buffer[position] <= '9'))
 			{
 				digit = buffer[position] - '0';
 				has_digit = 1;
-				if (valid && value > (ULLONG_MAX - (unsigned int)digit) / 10)
+				if (valid && (value > (ULLONG_MAX - (unsigned int)digit) / 10))
 					valid = 0;
 				else if (valid)
 					value = value * 10 + (unsigned int)digit;
 			}
-			else if (buffer[position] != '\r')
+			else
 				valid = 0;
 			position++;
 		}
-		if (valid && has_digit && value > 0)
+		if (valid && has_digit && (value > 0))
 			score_insert(scores, value);
 		position++;
 	}
@@ -78,7 +78,7 @@ void	scores_load(t_scores *scores)
 
 void	scores_record(t_scores *scores, unsigned long long score)
 {
-	if (scores && score > 0 && score_insert(scores, score))
+	if (scores && (score > 0) && score_insert(scores, score))
 		scores_save(scores);
 }
 
@@ -88,7 +88,7 @@ static int	score_insert(t_scores *scores, unsigned long long score)
 	int	index;
 
 	position = 0;
-	while (position < SCORE_COUNT && scores->values[position] >= score)
+	while ((position < SCORE_COUNT) && (scores->values[position] >= score))
 		position++;
 	if (position == SCORE_COUNT)
 		return (0);

@@ -26,9 +26,9 @@ int	game_move(t_grid *grid, t_direction direction,
 	int	line;
 	int	changed;
 
-	if (!grid || grid->rows != grid->columns
-		|| (grid->rows != 4 && grid->rows != 5)
-		|| direction < DIR_UP || direction > DIR_RIGHT)
+	if (!grid || (grid->rows != grid->columns)
+		|| ((grid->rows != 4) && (grid->rows != 5))
+		|| (direction < DIR_UP) || (direction > DIR_RIGHT))
 		return (0);
 	line = 0;
 	changed = 0;
@@ -47,7 +47,7 @@ static unsigned long long	read_line_cell(const t_grid *grid,
 	int	row;
 	int	column;
 
-	if (direction == DIR_LEFT || direction == DIR_RIGHT)
+	if ((direction == DIR_LEFT) || (direction == DIR_RIGHT))
 	{
 		row = line;
 		column = position;
@@ -70,7 +70,7 @@ static void	write_line_cell(t_grid *grid, t_direction direction,
 	int	row;
 	int	column;
 
-	if (direction == DIR_LEFT || direction == DIR_RIGHT)
+	if ((direction == DIR_LEFT) || (direction == DIR_RIGHT))
 	{
 		row = line;
 		column = position;
@@ -118,13 +118,13 @@ static int	move_line(t_grid *grid, t_direction direction, int line,
 	target = 0;
 	while (source < grid->rows)
 	{
-		if (values[source] != 0 && source + 1 < grid->rows
-			&& values[source] == values[source + 1]
-			&& values[source] <= ULLONG_MAX / 2)
+		if ((values[source] != 0) && (source + 1 < grid->rows)
+			&& (values[source] == values[source + 1])
+			&& (values[source] <= ULLONG_MAX / 2))
 		{
 			merged_value = values[source] * 2;
 			result[target] = merged_value;
-			if (score && *score > ULLONG_MAX - merged_value)
+			if (score && (*score > ULLONG_MAX - merged_value))
 				*score = ULLONG_MAX;
 			else if (score)
 				*score += merged_value;

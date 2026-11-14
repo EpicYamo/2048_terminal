@@ -82,7 +82,7 @@ int	main(void)
 				board_size = MENU_EXIT;
 				break ;
 			}
-			if (key == 'm' || key == 'M')
+			if ((key == 'm') || (key == 'M'))
 				break ;
 			if (!game_over && get_direction(key, &direction)
 				&& game_move(&grid, direction, &score))

@@ -19,7 +19,7 @@ int	grid_init(t_grid *grid, int rows, int columns)
 	int	row;
 	int	column;
 
-	if (!grid || rows != columns || (rows != 4 && rows != 5))
+	if (!grid || (rows != columns) || ((rows != 4) && (rows != 5)))
 		return (0);
 	grid->rows = rows;
 	grid->columns = columns;
@@ -60,6 +60,6 @@ unsigned long long	grid_get_value(const t_grid *grid, int row, int column)
 
 static int	is_valid_cell(const t_grid *grid, int row, int column)
 {
-	return (grid && row >= 0 && row < grid->rows
-		&& column >= 0 && column < grid->columns);
+	return (grid && (row >= 0) && (row < grid->rows)
+		&& (column >= 0) && (column < grid->columns));
 }

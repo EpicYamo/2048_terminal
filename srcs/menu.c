@@ -101,5 +101,5 @@ static void	draw_menu_item(int item, int row)
 
 static int	is_enter_key(int key)
 {
-	return (key == '\n' || key == '\r' || key == KEY_ENTER);
+	return ((key == '\n') || (key == '\r') || (key == KEY_ENTER));
 }

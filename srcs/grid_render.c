@@ -30,9 +30,9 @@ static int			power_of_two_exponent(unsigned long long value);
 
 void	grid_init_colors(void)
 {
-	if (!has_colors() || start_color() == ERR)
+	if (!has_colors() || (start_color() == ERR))
 		return ;
-	if (COLORS >= 256 && COLOR_PAIRS >= 14)
+	if ((COLORS >= 256) && (COLOR_PAIRS >= 14))
 	{
 		init_pair(1, COLOR_BLACK, 254);
 		init_pair(2, COLOR_BLACK, 223);
@@ -291,7 +291,7 @@ static const char	*digit_row(int digit, int line)
 {
 	if (line == 0)
 	{
-		if (digit == 1 || digit == 4)
+		if ((digit == 1) || (digit == 4))
 			return ("   ");
 		return (" _ ");
 	}
@@ -299,21 +299,21 @@ static const char	*digit_row(int digit, int line)
 	{
 		if (digit == 0)
 			return ("| |");
-		if (digit == 4 || digit == 8 || digit == 9)
+		if ((digit == 4) || (digit == 8) || (digit == 9))
 			return ("|_|");
 		if (digit == 1)
 			return (" | ");
 		if (digit == 7)
 			return ("  |");
-		if (digit == 2 || digit == 3)
+		if ((digit == 2) || (digit == 3))
 			return (" _|");
 		return ("|_ ");
 	}
-	if (digit == 0 || digit == 6 || digit == 8)
+	if ((digit == 0) || (digit == 6) || (digit == 8))
 		return ("|_|");
 	if (digit == 2)
 		return ("|_ ");
-	if (digit == 3 || digit == 5 || digit == 9)
+	if ((digit == 3) || (digit == 5) || (digit == 9))
 		return (" _|");
 	if (digit == 1)
 		return (" | ");
@@ -351,7 +351,7 @@ static int	power_of_two_exponent(unsigned long long value)
 {
 	int	exponent;
 
-	if (value == 0 || (value & (value - 1)) != 0)
+	if ((value == 0) || ((value & (value - 1)) != 0))
 		return (-1);
 	exponent = 0;
 	while (value > 1)

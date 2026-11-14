@@ -31,8 +31,8 @@ int	game_spawn_tile(t_grid *grid)
 	int	selected;
 	int	value;
 
-	if (!grid || (grid->rows != 4 && grid->rows != 5)
-		|| grid->columns != grid->rows)
+	if (!grid || ((grid->rows != 4) && (grid->rows != 5))
+		|| (grid->columns != grid->rows))
 		return (0);
 	empty_count = 0;
 	row = 0;
@@ -82,8 +82,8 @@ int	game_is_over(const t_grid *grid)
 	int					column;
 	unsigned long long	value;
 
-	if (!grid || (grid->rows != 4 && grid->rows != 5)
-		|| grid->columns != grid->rows)
+	if (!grid || ((grid->rows != 4) && (grid->rows != 5))
+		|| (grid->columns != grid->rows))
 		return (1);
 	row = 0;
 	while (row < grid->rows)
@@ -94,13 +94,13 @@ int	game_is_over(const t_grid *grid)
 			value = grid_get_value(grid, row, column);
 			if (value == 0)
 				return (0);
-			if (column + 1 < grid->columns
-				&& value == grid_get_value(grid, row, column + 1)
-				&& value <= ULLONG_MAX / 2)
+			if ((column + 1 < grid->columns)
+				&& (value == grid_get_value(grid, row, column + 1))
+				&& (value <= ULLONG_MAX / 2))
 				return (0);
-			if (row + 1 < grid->rows
-				&& value == grid_get_value(grid, row + 1, column)
-				&& value <= ULLONG_MAX / 2)
+			if ((row + 1 < grid->rows)
+				&& (value == grid_get_value(grid, row + 1, column))
+				&& (value <= ULLONG_MAX / 2))
 				return (0);
 			column++;
 		}
@@ -114,8 +114,8 @@ int	game_has_won(const t_grid *grid)
 	int	row;
 	int	column;
 
-	if (!grid || (grid->rows != 4 && grid->rows != 5)
-		|| grid->columns != grid->rows)
+	if (!grid || ((grid->rows != 4) && (grid->rows != 5))
+		|| (grid->columns != grid->rows))
 		return (0);
 	row = 0;
 	while (row < grid->rows)

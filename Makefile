@@ -7,6 +7,7 @@ FT_PRINTF		:= libft/ft_printf/libftprintf.a
 LIBFT_SRCS		:= $(filter-out %_bonus.c,$(wildcard libft/*.c))
 FT_PRINTF_SRCS	:= $(wildcard libft/ft_printf/*.c)
 OBJ_DIR			:= objs
+HEADERS			:= $(wildcard incs/*.h)
 SRCS			:= srcs/main.c \
 	srcs/grid.c \
 	srcs/grid_layout.c \
@@ -28,9 +29,10 @@ $(LIBFT): $(LIBFT_SRCS) libft/libft.h
 $(FT_PRINTF): $(FT_PRINTF_SRCS) libft/ft_printf/ft_printf.h
 	$(MAKE) -C libft/ft_printf
 
-$(OBJ_DIR)/%.o: srcs/%.c srcs/grid.h srcs/game.h srcs/menu.h srcs/scores.h libft/ft_printf/ft_printf.h
+
+$(OBJ_DIR)/%.o: srcs/%.c $(HEADERS) libft/ft_printf/ft_printf.h
 	mkdir -p $(OBJ_DIR)
-	$(CC) $(CFLAGS) -Isrcs -Ilibft -Ilibft/ft_printf -c $< -o $@
+	$(CC) $(CFLAGS) -Iincs -Ilibft -Ilibft/ft_printf -c $< -o $@
 
 clean:
 	rm -f $(OBJS)

@@ -6,19 +6,19 @@
 /*   By: aaycan <aaycan@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/14 23:11:56 by aaycan            #+#    #+#             */
-/*   Updated: 2026/11/14 23:12:13 by aaycan           ###   ########.fr       */
+/*   Updated: 2026/11/15 22:45:35 by aaycan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "game.h"
 #include <limits.h>
 
+static int	move_line(t_grid *grid, t_direction direction, int line,
+		unsigned long long *score);
 static unsigned long long	read_line_cell(const t_grid *grid,
 		t_direction direction, int line, int position);
 static void	write_line_cell(t_grid *grid, t_direction direction,
 		int line, int position, unsigned long long value);
-static int	move_line(t_grid *grid, t_direction direction, int line,
-		unsigned long long *score);
 
 int	game_move(t_grid *grid, t_direction direction,
 		unsigned long long *score)
@@ -41,54 +41,8 @@ int	game_move(t_grid *grid, t_direction direction,
 	return (changed);
 }
 
-static unsigned long long	read_line_cell(const t_grid *grid,
-		t_direction direction, int line, int position)
-{
-	int	row;
-	int	column;
-
-	if ((direction == DIR_LEFT) || (direction == DIR_RIGHT))
-	{
-		row = line;
-		column = position;
-		if (direction == DIR_RIGHT)
-			column = grid->columns - 1 - position;
-	}
-	else
-	{
-		column = line;
-		row = position;
-		if (direction == DIR_DOWN)
-			row = grid->rows - 1 - position;
-	}
-	return (grid_get_value(grid, row, column));
-}
-
-static void	write_line_cell(t_grid *grid, t_direction direction,
-		int line, int position, unsigned long long value)
-{
-	int	row;
-	int	column;
-
-	if ((direction == DIR_LEFT) || (direction == DIR_RIGHT))
-	{
-		row = line;
-		column = position;
-		if (direction == DIR_RIGHT)
-			column = grid->columns - 1 - position;
-	}
-	else
-	{
-		column = line;
-		row = position;
-		if (direction == DIR_DOWN)
-			row = grid->rows - 1 - position;
-	}
-	grid_set_value(grid, row, column, value);
-}
-
 static int	move_line(t_grid *grid, t_direction direction, int line,
-		unsigned long long *score)
+	unsigned long long *score)
 {
 	unsigned long long	values[GRID_MAX_SIZE];
 	unsigned long long	result[GRID_MAX_SIZE];
@@ -151,4 +105,50 @@ static int	move_line(t_grid *grid, t_direction direction, int line,
 		position++;
 	}
 	return (changed);
+}
+
+static unsigned long long	read_line_cell(const t_grid *grid,
+	t_direction direction, int line, int position)
+{
+	int	row;
+	int	column;
+
+	if ((direction == DIR_LEFT) || (direction == DIR_RIGHT))
+	{
+		row = line;
+		column = position;
+		if (direction == DIR_RIGHT)
+			column = grid->columns - 1 - position;
+	}
+	else
+	{
+		column = line;
+		row = position;
+		if (direction == DIR_DOWN)
+			row = grid->rows - 1 - position;
+	}
+	return (grid_get_value(grid, row, column));
+}
+
+static void	write_line_cell(t_grid *grid, t_direction direction,
+	int line, int position, unsigned long long value)
+{
+	int	row;
+	int	column;
+
+	if ((direction == DIR_LEFT) || (direction == DIR_RIGHT))
+	{
+		row = line;
+		column = position;
+		if (direction == DIR_RIGHT)
+			column = grid->columns - 1 - position;
+	}
+	else
+	{
+		column = line;
+		row = position;
+		if (direction == DIR_DOWN)
+			row = grid->rows - 1 - position;
+	}
+	grid_set_value(grid, row, column, value);
 }

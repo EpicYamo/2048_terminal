@@ -6,7 +6,7 @@
 /*   By: aaycan <aaycan@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/14 23:11:42 by aaycan            #+#    #+#             */
-/*   Updated: 2026/11/14 23:11:43 by aaycan           ###   ########.fr       */
+/*   Updated: 2026/11/15 22:32:32 by aaycan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,19 +37,5 @@ int	grid_layout(t_grid *grid, int terminal_rows, int terminal_columns)
 	grid->origin_y = GRID_MARGIN_Y + (usable_height - grid_height) / 2;
 	grid->origin_x = (terminal_columns - grid_width + 1) / 2;
 	grid->layout_valid = 1;
-	return (1);
-}
-
-int	grid_get_cell_bounds(const t_grid *grid, int row, int column,
-		t_cell_bounds *bounds)
-{
-	if (!grid || !bounds || !grid->layout_valid || (row < 0)
-		|| (row >= grid->rows) || (column < 0)
-		|| (column >= grid->columns))
-		return (0);
-	bounds->top = grid->origin_y + row * grid->cell_height;
-	bounds->left = grid->origin_x + column * grid->cell_width;
-	bounds->bottom = bounds->top + grid->cell_height;
-	bounds->right = bounds->left + grid->cell_width;
 	return (1);
 }

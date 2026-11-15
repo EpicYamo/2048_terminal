@@ -6,7 +6,7 @@
 /*   By: aaycan <aaycan@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/14 22:52:41 by aaycan            #+#    #+#             */
-/*   Updated: 2026/11/15 02:10:59 by aaycan           ###   ########.fr       */
+/*   Updated: 2026/11/15 22:44:39 by aaycan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,7 +136,7 @@ static void	scores_save(const t_scores *scores)
 }
 
 static int	append_score(char *buffer, int position,
-		unsigned long long score)
+	unsigned long long score)
 {
 	char	digits[20];
 	int		count;

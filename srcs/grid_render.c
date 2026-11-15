@@ -6,12 +6,12 @@
 /*   By: aaycan <aaycan@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/14 21:55:27 by aaycan            #+#    #+#             */
-/*   Updated: 2026/11/15 00:13:16 by aaycan           ###   ########.fr       */
+/*   Updated: 2026/11/15 22:44:56 by aaycan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "grid.h"
-#include <curses.h>
+#include <ncurses.h>
 
 static void			draw_grid_lines(const t_grid *grid);
 static int			number_length(unsigned long long value);
@@ -19,7 +19,7 @@ static void			draw_cell_values(const t_grid *grid);
 static void			draw_ascii_value(const t_grid *grid, int row, int column,
 						unsigned long long value, int length);
 static void			draw_ascii_power(const t_grid *grid, int row, int column,
-		int exponent);
+						int exponent);
 static void			draw_ascii_digit(int x, int y, int digit);
 static void			fill_cell(const t_grid *grid, int row, int column);
 static void			draw_compact_value(const t_grid *grid, int row, int column,
@@ -118,19 +118,6 @@ static void	draw_grid_lines(const t_grid *grid)
 	}
 }
 
-static int	number_length(unsigned long long value)
-{
-	int	length;
-
-	length = 1;
-	while (value >= 10)
-	{
-		value /= 10;
-		length++;
-	}
-	return (length);
-}
-
 static void	draw_cell_values(const t_grid *grid)
 {
 	int					row;
@@ -167,6 +154,33 @@ static void	draw_cell_values(const t_grid *grid)
 	}
 }
 
+static int	tile_color_pair(unsigned long long value)
+{
+	if (value == 2)
+		return (1);
+	if (value == 4)
+		return (2);
+	if (value == 8)
+		return (3);
+	if (value == 16)
+		return (4);
+	if (value == 32)
+		return (5);
+	if (value == 64)
+		return (6);
+	if (value == 128)
+		return (7);
+	if (value == 256)
+		return (8);
+	if (value == 512)
+		return (9);
+	if (value == 1024)
+		return (10);
+	if (value == 2048)
+		return (11);
+	return (12);
+}
+
 static void	fill_cell(const t_grid *grid, int row, int column)
 {
 	int	y;
@@ -183,8 +197,21 @@ static void	fill_cell(const t_grid *grid, int row, int column)
 	}
 }
 
+static int	number_length(unsigned long long value)
+{
+	int	length;
+
+	length = 1;
+	while (value >= 10)
+	{
+		value /= 10;
+		length++;
+	}
+	return (length);
+}
+
 static void	draw_ascii_value(const t_grid *grid, int row, int column,
-		unsigned long long value, int length)
+	unsigned long long value, int length)
 {
 	char	digits[20];
 	int	count;
@@ -218,8 +245,23 @@ static void	draw_ascii_value(const t_grid *grid, int row, int column,
 	}
 }
 
+static int	power_of_two_exponent(unsigned long long value)
+{
+	int	exponent;
+
+	if ((value == 0) || ((value & (value - 1)) != 0))
+		return (-1);
+	exponent = 0;
+	while (value > 1)
+	{
+		value >>= 1;
+		exponent++;
+	}
+	return (exponent);
+}
+
 static void	draw_ascii_power(const t_grid *grid, int row, int column,
-		int exponent)
+	int exponent)
 {
 	char	digits[3];
 	int	count;
@@ -263,7 +305,7 @@ static void	draw_ascii_digit(int x, int y, int digit)
 }
 
 static void	draw_compact_value(const t_grid *grid, int row, int column,
-		unsigned long long value, int length)
+	unsigned long long value, int length)
 {
 	int	x;
 	int	y;
@@ -318,46 +360,4 @@ static const char	*digit_row(int digit, int line)
 	if (digit == 1)
 		return (" | ");
 	return ("  |");
-}
-
-static int	tile_color_pair(unsigned long long value)
-{
-	if (value == 2)
-		return (1);
-	if (value == 4)
-		return (2);
-	if (value == 8)
-		return (3);
-	if (value == 16)
-		return (4);
-	if (value == 32)
-		return (5);
-	if (value == 64)
-		return (6);
-	if (value == 128)
-		return (7);
-	if (value == 256)
-		return (8);
-	if (value == 512)
-		return (9);
-	if (value == 1024)
-		return (10);
-	if (value == 2048)
-		return (11);
-	return (12);
-}
-
-static int	power_of_two_exponent(unsigned long long value)
-{
-	int	exponent;
-
-	if ((value == 0) || ((value & (value - 1)) != 0))
-		return (-1);
-	exponent = 0;
-	while (value > 1)
-	{
-		value >>= 1;
-		exponent++;
-	}
-	return (exponent);
 }

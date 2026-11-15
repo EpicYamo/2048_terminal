@@ -2,10 +2,8 @@ NAME			:= 2048
 CC				:= cc
 CFLAGS			:= -Wall -Wextra -Werror
 LDLIBS			:= -lncurses
-LIBFT			:= libft/libft.a
-FT_PRINTF		:= libft/ft_printf/libftprintf.a
-LIBFT_SRCS		:= $(filter-out %_bonus.c,$(wildcard libft/*.c))
-FT_PRINTF_SRCS	:= $(wildcard libft/ft_printf/*.c)
+FT_PRINTF		:= ft_printf/libftprintf.a
+FT_PRINTF_SRCS	:= $(wildcard ft_printf/*.c)
 OBJ_DIR			:= objs
 HEADERS			:= $(wildcard incs/*.h)
 SRCS			:= srcs/main.c \
@@ -20,32 +18,26 @@ OBJS			:= $(patsubst srcs/%.c,$(OBJ_DIR)/%.o,$(SRCS))
 
 all: $(NAME)
 
-$(NAME): $(OBJS) $(LIBFT) $(FT_PRINTF)
-	$(CC) $(OBJS) $(FT_PRINTF) $(LIBFT) $(LDLIBS) -o $@
+$(NAME): $(OBJS) $(FT_PRINTF)
+	$(CC) $(OBJS) $(FT_PRINTF) $(LDLIBS) -o $@
 
-$(LIBFT): $(LIBFT_SRCS) libft/libft.h
-	$(MAKE) -C libft
+$(FT_PRINTF): $(FT_PRINTF_SRCS) ft_printf/ft_printf.h
+	$(MAKE) -C ft_printf
 
-$(FT_PRINTF): $(FT_PRINTF_SRCS) libft/ft_printf/ft_printf.h
-	$(MAKE) -C libft/ft_printf
-
-
-$(OBJ_DIR)/%.o: srcs/%.c $(HEADERS) libft/ft_printf/ft_printf.h
+$(OBJ_DIR)/%.o: srcs/%.c $(HEADERS) ft_printf/ft_printf.h
 	mkdir -p $(OBJ_DIR)
-	$(CC) $(CFLAGS) -Iincs -Ilibft -Ilibft/ft_printf -c $< -o $@
+	$(CC) $(CFLAGS) -Iincs -Ift_printf -c $< -o $@
 
 clean:
 	rm -f $(OBJS)
 	if [ -d $(OBJ_DIR) ]; then rmdir $(OBJ_DIR); fi
-	$(MAKE) -C libft clean
-	$(MAKE) -C libft/ft_printf clean
+	$(MAKE) -C ft_printf clean
 
 fclean:
 	rm -f $(OBJS)
 	if [ -d $(OBJ_DIR) ]; then rmdir $(OBJ_DIR); fi
 	rm -f $(NAME)
-	$(MAKE) -C libft fclean
-	$(MAKE) -C libft/ft_printf fclean
+	$(MAKE) -C ft_printf fclean
 
 re: fclean all
 

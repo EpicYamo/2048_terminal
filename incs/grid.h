@@ -6,7 +6,7 @@
 /*   By: aaycan <aaycan@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/14 20:11:21 by aaycan            #+#    #+#             */
-/*   Updated: 2026/11/15 01:08:54 by aaycan           ###   ########.fr       */
+/*   Updated: 2026/11/15 22:32:54 by aaycan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,6 @@
 # define GRID_H
 
 # define GRID_MAX_SIZE 5
-
-typedef struct s_cell_bounds
-{
-	int	top;
-	int	left;
-	int	bottom;
-	int	right;
-} t_cell_bounds;
 
 typedef struct s_grid
 {
@@ -40,8 +32,6 @@ int					grid_set_value(t_grid *grid, int row, int column,
 						unsigned long long value);
 unsigned long long	grid_get_value(const t_grid *grid, int row, int column);
 int					grid_layout(t_grid *grid, int terminal_rows, int terminal_columns);
-int					grid_get_cell_bounds(const t_grid *grid, int row, int column,
-						t_cell_bounds *bounds);
 void				grid_draw(t_grid *grid);
 void				grid_init_colors(void);
 

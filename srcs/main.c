@@ -6,14 +6,14 @@
 /*   By: aaycan <aaycan@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/14 19:42:51 by aaycan            #+#    #+#             */
-/*   Updated: 2026/11/14 23:09:04 by aaycan           ###   ########.fr       */
+/*   Updated: 2026/11/15 20:48:23 by aaycan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "game.h"
 #include "ft_printf.h"
 #include "menu.h"
-#include <curses.h>
+#include <ncurses.h>
 #include <stdlib.h>
 #include <time.h>
 

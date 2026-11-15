@@ -6,12 +6,12 @@
 /*   By: aaycan <aaycan@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/14 23:11:12 by aaycan            #+#    #+#             */
-/*   Updated: 2026/11/14 23:11:13 by aaycan           ###   ########.fr       */
+/*   Updated: 2026/11/15 22:44:33 by aaycan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "menu.h"
-#include <curses.h>
+#include <ncurses.h>
 
 static void	draw_main_menu(const t_scores *scores, int selected);
 static void	draw_best_scores(const t_scores *scores,
@@ -76,7 +76,7 @@ static void	draw_main_menu(const t_scores *scores, int selected)
 }
 
 static void	draw_best_scores(const t_scores *scores,
-		int start_row, int column)
+	int start_row, int column)
 {
 	int	index;
 

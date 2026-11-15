@@ -14,6 +14,7 @@
 #include "ft_printf.h"
 #include "menu.h"
 #include <ncurses.h>
+#include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
 
@@ -23,6 +24,7 @@ int	main(void)
 {
 	t_grid				grid;
 	t_scores			scores;
+	SCREEN				*screen;
 	int					board_size;
 	int					key;
 	int					game_over;
@@ -32,11 +34,13 @@ int	main(void)
 	t_direction			direction;
 
 	scores_load(&scores);
-	if (initscr() == NULL)
+	screen = newterm(NULL, stdout, stdin);
+	if (!screen)
 	{
 		ft_printf(FT_STDERR, "Error: could not initialize ncurses.\n");
 		return (1);
 	}
+	set_term(screen);
 	cbreak();
 	noecho();
 	keypad(stdscr, TRUE);
@@ -93,6 +97,7 @@ int	main(void)
 			break ;
 	}
 	endwin();
+	delscreen(screen);
 	return (0);
 }
 
